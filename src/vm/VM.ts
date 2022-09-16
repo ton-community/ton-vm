@@ -78,7 +78,9 @@ export class VM {
 
         if (this.#codeSlice.remaining > 0) {
             let opcode = readOpcode(this.#codeSlice);
-            console.warn(opcode.code);
+            if (this.debug) {
+                console.warn(opcode.code);
+            }
             return allHandlers.process(this, opcode);
         } else if (this.#codeSlice.remainingRefs > 0) {
             // Implicit jmp

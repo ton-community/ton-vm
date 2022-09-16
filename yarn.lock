@@ -765,6 +765,11 @@ arg@^4.1.0:
   resolved "https://registry.yarnpkg.com/arg/-/arg-4.1.3.tgz#269fc7ad5b8e42cb63c896d5666017261c144089"
   integrity sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==
 
+arg@^5.0.1:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/arg/-/arg-5.0.2.tgz#c81433cc427c92c4dcf4865142dbca6f15acd59c"
+  integrity sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==
+
 argparse@^1.0.7:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
@@ -859,7 +864,7 @@ bn.js@5.2.0:
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-5.2.0.tgz#358860674396c6997771a9d051fcc1b57d4ae002"
   integrity sha512-D7iWRBvnZE8ecXiLj/9wbxH7Tk79fAh8IHaTNq1RWRixsS02W+5qS+iE9yq6RYl0asXx5tw0bLhmT5pIfbSquw==
 
-bn.js@^5.2.1:
+bn.js@^5.2.0, bn.js@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-5.2.1.tgz#0bc527a6a0d18d0aa8d5b0538ce4a77dccfa7b70"
   integrity sha512-eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==
@@ -2052,6 +2057,13 @@ resolve@^1.20.0:
     path-parse "^1.0.7"
     supports-preserve-symlinks-flag "^1.0.0"
 
+rimraf@^3.0.0:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-3.0.2.tgz#f1a5402ba6220ad52cc1282bac1ae3aa49fd061a"
+  integrity sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
+  dependencies:
+    glob "^7.1.3"
+
 safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
@@ -2228,6 +2240,13 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
+tmp@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.2.1.tgz#8457fc3037dcf4719c251367a1af6500ee1ccf14"
+  integrity sha512-76SUhtfqR2Ijn+xllcI5P1oyannHNHByD80W1q447gU3mp9G9PSpGdWmjUOHRDPiHYacIk66W7ubDTuPF3BEtQ==
+  dependencies:
+    rimraf "^3.0.0"
+
 tmpl@1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.5.tgz#8683e0b902bb9c20c4f726e3c0b69f36518c07cc"
@@ -2244,6 +2263,30 @@ to-regex-range@^5.0.1:
   integrity sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==
   dependencies:
     is-number "^7.0.0"
+
+ton-compiler@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/ton-compiler/-/ton-compiler-0.9.0.tgz#c8a3421b65122332c7f6372ddd39848614f2a670"
+  integrity sha512-7ZyjmSSmI8s/hd+H3c8qCzvUxDWLml4T8Lhr3DNAucadWhAXiVniTgPHHQNt5nbfZMvHKGevGw18pRkf5cFBZA==
+  dependencies:
+    arg "^5.0.1"
+    tmp "^0.2.1"
+
+ton-compiler@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ton-compiler/-/ton-compiler-1.0.0.tgz#6742a4e1c3dbc29f66d771f0233918db29b27a75"
+  integrity sha512-BAjp1pNFR3qvGYXFPzRPzVkb76yMxE/SaYDSzgdTa0j/G6V3N9B0sVylUUpNzKhAwtQEEizbrO3ML7mlFhTwRw==
+  dependencies:
+    arg "^5.0.1"
+    tmp "^0.2.1"
+
+ton-contract-executor@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/ton-contract-executor/-/ton-contract-executor-0.5.2.tgz#db577bcb71784e22b31125bc146f2fbf21695062"
+  integrity sha512-S3zKHqfw1z1P/3y95cqL/D+XkRfi8FRM0b7RNBiuTxHii1f7WjIQRcu8iKf15+MGbZoOBfc9yb90SMx4zGqitQ==
+  dependencies:
+    bn.js "^5.2.0"
+    ton-compiler "^0.9.0"
 
 ton-crypto-primitives@2.0.0:
   version "2.0.0"
@@ -2270,7 +2313,20 @@ ton-crypto@^3.2.0:
     ton-crypto-primitives "2.0.0"
     tweetnacl "1.0.3"
 
-ton@^12.1.3:
+ton-disassembler@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/ton-disassembler/-/ton-disassembler-1.1.1.tgz#be5c0bdd6053e0579643ee01cac8014df8177243"
+  integrity sha512-J9Y7W76FbYeQry7pa2mBLGBaUOf2OGEc/5N0gP4LnVrzWo8b4HfV7JaG6dovezfSRUjkML8iuHagHjmclLcnyw==
+  dependencies:
+    bn.js "^5.2.0"
+    ton "^9.3.1"
+
+ton-nodejs@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/ton-nodejs/-/ton-nodejs-1.4.0.tgz#615cf508c8627db98f1127de2a8f7d14a72ab163"
+  integrity sha512-/WXRfDPiaAWoaPJcyV8DTM9kWT+noqd61yBhhAB0vLaA5FH1gEfOIbc2D3ULj+9dF21hpLli0FRHJG4lKqbuTg==
+
+ton@^12.1.3, ton@^9.3.1:
   version "12.1.3"
   resolved "https://registry.yarnpkg.com/ton/-/ton-12.1.3.tgz#ef569b61cb1dea44f83e1e24734588faa0a40362"
   integrity sha512-ZkXyr2UkYEQfCX5QKY9xQfzLyM4MDZE+Lz7RICr74wS3fwk5lkJ1/KrQZqb2/DwtoBonEaiNjm6x+r86Q8peFA==

@@ -1,7 +1,5 @@
 import BN from "bn.js";
-import { beginCell, Cell, parseDict, Slice } from "ton";
-import { decompileMethodsMap } from "ton-disassembler/dist/disassembler";
-import { Arg, Op } from "./codepage/Codepage";
+import { beginCell, Cell } from "ton";
 import { decompile as ord } from 'ton-disassembler';
 import { VM } from "./vm/VM";
 
