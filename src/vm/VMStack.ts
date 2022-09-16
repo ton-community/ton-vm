@@ -79,6 +79,12 @@ export class VMStack {
         }
     }
 
+    blockswap(i: number, j: number) {
+        this.reverse(i, j);
+        this.reverse(j, 0);
+        this.reverse(i + j, 0);
+    }
+
     truncateTop(l: number) {
         if (l >= this.#values.length) {
             throw new Error('Index out of bounds');

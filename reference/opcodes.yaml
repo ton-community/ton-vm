@@ -39,6 +39,9 @@ opcodes:
   ONLYTOPX:
   ONLYX:
   BLKDROP2: ["int", "int"]
+  ROLLX:
+  ROLLREVX:
+  REVX:
 
   # A.3.1. Null primitives.
   "NULL": []

@@ -160,10 +160,10 @@ CP0Auto.insertHex('5f', 8, (slice) => {
     return { code: 'BLKPUSH', args: [i, j] };
 });
 CP0Auto.insertHex('60', 8, { code: 'PICK' });
-// CP0Auto.insertHex('61', 8, { code: 'ROLLX' });
-// CP0Auto.insertHex('62', 8, { code: 'ROLLREVX' });
+CP0Auto.insertHex('61', 8, { code: 'ROLLX' });
+CP0Auto.insertHex('62', 8, { code: 'ROLLREVX' });
 CP0Auto.insertHex('63', 8, { code: 'BLKSWX' });
-// CP0Auto.insertHex('64', 8, { code: 'REVX' });
+CP0Auto.insertHex('64', 8, { code: 'REVX' });
 CP0Auto.insertHex('65', 8, { code: 'DROPX' });
 CP0Auto.insertHex('66', 8, { code: 'TUCK' });
 CP0Auto.insertHex('67', 8, { code: 'XCHGX' });

@@ -62,8 +62,8 @@ export function registerStackOpcodes(table: DispatchTable) {
         let y = vm.stack.popSmallIntRange(255);
         if (x > 0 && y > 0) {
             vm.stack.reverse(x, y);
-            vm.stack.reverse(y, 0);
-            vm.stack.reverse(x + y, 0);
+            vm.stack.reverse(0, x);
+            vm.stack.reverse(0, x + y);
         }
         return 0;
     });
@@ -109,6 +109,26 @@ export function registerStackOpcodes(table: DispatchTable) {
         for (let i = 0; i < x; i++) {
             vm.stack.pop(y);
         }
+        return 0;
+    });
+    table.register('ROLLX', (vm) => {
+        let x = vm.stack.popSmallIntRange(255);
+        while (--x >= 0) {
+            vm.stack.swap(x, x + 1);
+        }
+        return 0;
+    });
+    table.register('ROLLREVX', (vm) => {
+        let x = vm.stack.popSmallIntRange(255);
+        for (let i = 0; i < x; i++) {
+            vm.stack.swap(i, i + 1);
+        }
+        return 0;
+    });
+    table.register('REVX', (vm) => {
+        let i = vm.stack.popSmallIntRange(255);
+        let j = vm.stack.popSmallIntRange(255);
+        vm.stack.reverse(i, j);
         return 0;
     });
 

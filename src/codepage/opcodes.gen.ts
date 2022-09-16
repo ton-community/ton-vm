@@ -36,6 +36,9 @@ export type OpCodes =
     | { code: 'ONLYTOPX' }
     | { code: 'ONLYX' }
     | { code: 'BLKDROP2', args: [number, number] }
+    | { code: 'ROLLX' }
+    | { code: 'ROLLREVX' }
+    | { code: 'REVX' }
     | { code: 'NULL' }
     | { code: 'ISNULL' }
     | { code: 'TUPLE', args: [number] }
@@ -395,8 +398,6 @@ export type OpCodes =
     | { code: 'THROWARGANYIFNOT' }
     | { code: 'TRY' }
     | { code: 'TRYARGS', args: [number, number] }
-    | { code: 'NEWDICT' }
-    | { code: 'DICTEMPTY' }
     | { code: 'STDICTS' }
     | { code: 'STDICT' }
     | { code: 'SKIPDICT' }
