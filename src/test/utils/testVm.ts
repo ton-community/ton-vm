@@ -30,9 +30,12 @@ function convertRefStack(src: TVMStackEntry): any {
         return { type: 'cell', value: Cell.fromBoc(Buffer.from(src.value, 'base64'))[0].toBoc({ idx: false }).toString('base64') };
     }
     if (src.type === 'int') {
+        if (src.value === 'NaN') {
+            return { type: 'nan' };
+        }
         return { type: 'int', value: new BN(src.value, 10).toString(10) };
     }
-    throw Error('Unsupported stack item');
+    throw Error('Unsupported stack item: ' + src.type);
 }
 
 function convertLocStack(src: VMStackItem): any {
@@ -45,7 +48,10 @@ function convertLocStack(src: VMStackItem): any {
     if (src.type === 'int') {
         return { type: 'int', value: new BN(src.value, 10).toString(10) };
     }
-    throw Error('Unsupported stack item');
+    if (src.type === 'nan') {
+        return { type: 'nan' };
+    }
+    throw Error('Unsupported stack item: ' + src.type);
 }
 
 async function executeLocal(code: Cell) {

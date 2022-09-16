@@ -11,6 +11,26 @@ export function registerMathOpcodes(table: DispatchTable) {
         vm.stack.pushInt(v, false);
         return 0;
     });
+    table.register('PUSHPOW2', (vm, [v]) => {
+        if (v === 256) {
+            vm.stack.push({ type: 'nan' });
+            return 0;
+        }
+        vm.stack.pushInt(new BN(2).pow(new BN(v)), false);
+        return 0;
+    });
+    table.register('PUSHNAN', (vm) => {
+        vm.stack.push({ type: 'nan' });
+        return 0;
+    });
+    table.register('PUSHPOW2DEC', (vm, [v]) => {
+        vm.stack.pushInt(new BN(2).pow(new BN(v)).subn(1), false);
+        return 0;
+    });
+    table.register('PUSHNEGPOW2', (vm, [v]) => {
+        vm.stack.pushInt(new BN(2).pow(new BN(v)).muln(-1), false);
+        return 0;
+    });
 
     table.register('ADD', (vm) => {
         let a = vm.stack.popInt();

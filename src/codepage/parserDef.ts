@@ -250,11 +250,11 @@ CP0Auto.insertHex('6fb', 12, (slice) => {
 //     return `${i} ${j} ${k} INDEX3`;
 // });
 CP0Auto.insertHex('7', 4, (slice) => {
-    let args = slice.readIntNumber(4);
+    let args = ((slice.readUintNumber(4) + 5) & 15) - 5;
     return { code: 'PUSHINT', args: [new BN(args)] };
 });
 CP0Auto.insertHex('80', 8, (slice) => {
-    let x = slice.readIntNumber(8)
+    let x = slice.readIntNumber(8);
     return { code: 'PUSHINT', args: [new BN(x)] };
 })
 CP0Auto.insertHex('81', 8, (slice) => {
