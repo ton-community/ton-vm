@@ -22,43 +22,36 @@ async function compileF(src: string) {
     return Cell.fromBoc(await compileFift(cc))[0];
 }
 
-async function executeLocal(code: Cell) {
-    const vm = new VM(code, [{ type: 'int', value: new BN(0) }]);
-    vm.run();
-    return vm.stack.dump();
-}
-
-function expectSameStack(a: VMStackItem[], b: VMStackItem[]) {
-    expect(a).toMatchObject(b);
-    // expect(a.length).toBe(b.length);
-    // for (let i = 0; i < a.length; i++) {
-    //     const ai = a[i];
-    //     const bi = b[i];
-    //     if (ai.type !== bi.type) {
-    //         throw Error('Different types');
-    //     }
-    //     if (ai.type === 'int' && bi.type === 'int') {
-    //         expect(ai.value.toString(10)).toBe(bi.value.toString(10));
-    //         continue;
-    //     }
-    //     if (ai.type === 'null' && bi.type === 'null') {
-    //         continue;
-    //     }
-    //     throw Error('Unsupported type');
-    // }
-}
-
-function convertStack(src: TVMStackEntry): VMStackItem {
+function convertRefStack(src: TVMStackEntry): any {
     if (src.type === 'null') {
         return { type: 'null' };
     }
     if (src.type === 'cell') {
-        return { type: 'cell', value: Cell.fromBoc(Buffer.from(src.value, 'base64'))[0] };
+        return { type: 'cell', value: Cell.fromBoc(Buffer.from(src.value, 'base64'))[0].toBoc({ idx: false }).toString('base64') };
     }
     if (src.type === 'int') {
-        return { type: 'int', value: new BN(src.value, 10) };
+        return { type: 'int', value: new BN(src.value, 10).toString(10) };
     }
     throw Error('Unsupported stack item');
+}
+
+function convertLocStack(src: VMStackItem): any {
+    if (src.type === 'null') {
+        return { type: 'null' };
+    }
+    if (src.type === 'cell') {
+        return { type: 'cell', value: src.value.toBoc({ idx: false }).toString('base64') };
+    }
+    if (src.type === 'int') {
+        return { type: 'int', value: new BN(src.value, 10).toString(10) };
+    }
+    throw Error('Unsupported stack item');
+}
+
+async function executeLocal(code: Cell) {
+    const vm = new VM(code, [{ type: 'int', value: new BN(0) }]);
+    vm.run();
+    return vm.stack.dump().map(convertLocStack);
 }
 
 async function executeReference(code: Cell) {
@@ -76,7 +69,7 @@ async function executeReference(code: Cell) {
     if (!res.ok) {
         throw Error('VM Error');
     }
-    return res.stack.map(convertStack).reverse();
+    return res.stack.map(convertRefStack).reverse();
 }
 
 export async function testVM(source: string) {
@@ -91,5 +84,25 @@ export async function testVM(source: string) {
     let localStack = await executeLocal(code);
 
     // Check
-    expectSameStack(localStack, remoteStack);
+    expect(localStack).toMatchObject(remoteStack);
+}
+
+export function testVMSteps(prefix: string, source: string) {
+    let lines = fs.readFileSync(__dirname + '/../sources/' + source, 'utf-8').split('\n');
+    for (let i = 1; i <= lines.length; i++) {
+        it(prefix + ' line #' + i, async () => {
+
+            // Compile
+            let code = await compileF(lines.slice(0, i).join('\n'));
+
+            // Reference
+            let remoteStack = await executeReference(code);
+
+            // Execute VM
+            let localStack = await executeLocal(code);
+
+            // Check
+            expect(localStack).toMatchObject(remoteStack);
+        });
+    }
 }

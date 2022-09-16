@@ -7,6 +7,9 @@ export function registerStackOpcodes(table: DispatchTable) {
     //
 
     table.register('XCHG', (vm, [a1, a2]) => {
+        if (a1 === 0 && a2 === 0) {
+            return 0; // NOP
+        }
         vm.stack.swap(a1, a2);
         return 0;
     });
@@ -15,11 +18,16 @@ export function registerStackOpcodes(table: DispatchTable) {
         return 0;
     });
     table.register('POP', (vm, [x]) => {
-        vm.stack.pop(x);
+        if (x === 0) {
+            vm.stack.pop();
+        } else {
+            vm.stack.swap(0, x);
+            vm.stack.pop();
+        }
         return 0;
     });
-    table.register('REVERSE', (vm, [x, y]) => {
-        vm.stack.reverse(x, y);
+    table.register('REVERSE', (vm, [l, i]) => {
+        vm.stack.reverse(i, l);
         return 0;
     });
     table.register('ROT', (vm) => {

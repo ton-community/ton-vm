@@ -1,5 +1,0 @@
-int test_case() asm "70 PUSHINT";
-
-_ main() {
-    return 70;
-}

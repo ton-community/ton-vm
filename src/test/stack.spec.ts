@@ -1,7 +1,5 @@
-import { testVM } from "./utils/testVm";
+import { testVM, testVMSteps } from "./utils/testVm";
 
 describe('stack', () => {
-    it('should process stack', async () => {
-        await testVM('stack.fif');
-    });
+    testVMSteps('should process stack', 'stack.fif');
 });
