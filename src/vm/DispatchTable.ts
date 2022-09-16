@@ -5,7 +5,6 @@ type SelectOpcode<T> = Extract<OpCodes, { code: T }>;
 type Handler<T, P> = T extends { args: any } ? (vm: VM, args: T['args']) => P : (vm: VM) => P;
 type HandlerProcessor<T, P> = T extends { args: any } ? (args: T['args']) => P : () => P;
 
-
 export class DispatchTable {
 
     private readonly handlers: Map<string, (vm: VM, handler: any) => number>;
@@ -54,9 +53,12 @@ export class DispatchTable {
         if (!handler) {
             throw Error('Unimplemented opcode: ' + opcode.code);
         }
+
         if ((opcode as any).args) {
+            // console.warn(opcode.code, (opcode as any).args);
             return handler(vm, (opcode as any).args);
         } else {
+            // console.warn(opcode.code);
             return handler(vm, undefined);
         }
     }

@@ -160,7 +160,7 @@ export function registerStackOpcodes(table: DispatchTable) {
             { code: 'XCHG', args: [1, x] },
             { code: 'PUSH', args: [y] },
             { code: 'XCHG', args: [0, 1] },
-            { code: 'XCHG', args: [0, z] },
+            { code: 'XCHG', args: [0, z - 1] },
         ];
     });
     table.preprocessor('XC2PU', ([x, y, z]) => {
@@ -174,32 +174,32 @@ export function registerStackOpcodes(table: DispatchTable) {
         return [
             { code: 'PUSH', args: [x] },
             { code: 'XCHG', args: [0, 1] },
-            { code: 'XCHG', args: [0, y] }
+            { code: 'XCHG', args: [0, y - 1] }
         ];
     });
     table.preprocessor('PUXC2', ([x, y, z]) => {
         return [
             { code: 'PUSH', args: [x] },
             { code: 'XCHG', args: [2, 0] },
-            { code: 'XCHG', args: [1, y] },
-            { code: 'XCHG', args: [0, z] }
+            { code: 'XCHG', args: [1, y - 1] },
+            { code: 'XCHG', args: [0, z - 1] }
         ];
     });
     table.preprocessor('PU2XC', ([x, y, z]) => {
         return [
             { code: 'PUSH', args: [x] },
             { code: 'XCHG', args: [1, 0] },
-            { code: 'PUSH', args: [y] },
+            { code: 'PUSH', args: [y + 1] },
             { code: 'XCHG', args: [1, 0] },
-            { code: 'XCHG', args: [0, z] }
+            { code: 'XCHG', args: [0, z - 2] }
         ];
     });
     table.preprocessor('PUXCPU', ([x, y, z]) => {
         return [
             { code: 'PUSH', args: [x] },
             { code: 'XCHG', args: [0, 1] },
-            { code: 'XCHG', args: [0, y] },
-            { code: 'PUSH', args: [z] },
+            { code: 'XCHG', args: [0, y - 1] },
+            { code: 'PUSH', args: [z - 1] },
         ];
     });
     table.preprocessor('BLKSWAP', ([x, y]) => {

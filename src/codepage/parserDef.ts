@@ -60,13 +60,13 @@ CP0Auto.insertHex('51', 8, (slice) => {
 CP0Auto.insertHex('52', 8, (slice) => {
     let i = slice.readUintNumber(4);
     let j = slice.readUintNumber(4);
-    return { code: 'PUXC', args: [i, j - 1] };
+    return { code: 'PUXC', args: [i, j + 1] };
 })
 CP0Auto.insertHex('53', 8, (slice) => {
     let args = slice.readUintNumber(8);
     let first = args >> 4 & 0xf;
     let second = args & 0xf;
-    return { code: 'XCPU', args: [first, second] };
+    return { code: 'PUSH2', args: [first, second] };
 })
 CP0Auto.insertHex('540', 12, (slice) => {
     let args = slice.readUintNumber(12);
@@ -87,7 +87,7 @@ CP0Auto.insertHex('542', 12, (slice) => {
     let i = args >> 8 & 0xf;
     let j = args >> 4 & 0xf;
     let k = args & 0xf;
-    return { code: 'XCPUXC', args: [i, j, k - 1] };
+    return { code: 'XCPUXC', args: [i, j, k + 1] };
 });
 CP0Auto.insertHex('543', 12, (slice) => {
     let args = slice.readUintNumber(12);
@@ -101,21 +101,21 @@ CP0Auto.insertHex('544', 12, (slice) => {
     let i = args >> 8 & 0xf;
     let j = args >> 4 & 0xf;
     let k = args & 0xf;
-    return { code: 'PUXC2', args: [i, j - 1, k - 1] };
+    return { code: 'PUXC2', args: [i, j + 1, k + 1] };
 });
 CP0Auto.insertHex('545', 12, (slice) => {
     let args = slice.readUintNumber(12);
     let i = args >> 8 & 0xf;
     let j = args >> 4 & 0xf;
     let k = args & 0xf;
-    return { code: 'PUXCPU', args: [i, j - 1, k - 1] };
+    return { code: 'PUXCPU', args: [i, j + 1, k + 1] };
 });
 CP0Auto.insertHex('546', 12, (slice) => {
     let args = slice.readUintNumber(12);
     let i = args >> 8 & 0xf;
     let j = args >> 4 & 0xf;
     let k = args & 0xf;
-    return { code: 'PU2XC', args: [i, j - 1, k - 2] };
+    return { code: 'PU2XC', args: [i, j + 1, k + 2] };
 });
 CP0Auto.insertHex('547', 12, (slice) => {
     let args = slice.readUintNumber(12);

@@ -73,7 +73,7 @@ async function executeReference(code: Cell) {
         }
     });
     if (!res.ok) {
-        throw Error('VM Error');
+        throw Error('VM Error: ' + Buffer.from(res.logs!, 'base64').toString('utf8'));
     }
     return res.stack.map(convertRefStack).reverse();
 }
@@ -93,9 +93,9 @@ export async function testVM(source: string) {
     expect(localStack).toMatchObject(remoteStack);
 }
 
-export function testVMSteps(prefix: string, source: string) {
+export function testVMSteps(prefix: string, source: string, all: boolean = false) {
     let lines = fs.readFileSync(__dirname + '/../sources/' + source, 'utf-8').split('\n');
-    for (let i = 1; i <= lines.length; i++) {
+    for (let i = all ? lines.length : 1; i <= lines.length; i++) {
         it(prefix + ' line #' + i, async () => {
 
             // Compile
@@ -106,6 +106,11 @@ export function testVMSteps(prefix: string, source: string) {
 
             // Execute VM
             let localStack = await executeLocal(code);
+
+            if (all) {
+                console.warn(remoteStack);
+                console.warn(localStack);
+            }
 
             // Check
             expect(localStack).toMatchObject(remoteStack);
