@@ -97,6 +97,8 @@ export type OpCodes =
     | { code: 'DIV', args: [boolean, number, boolean, number, number] }
     | { code: 'LSHIFT', args: [number] }
     | { code: 'RSHIFT', args: [number] }
+    | { code: 'LSHIFTX' }
+    | { code: 'RSHIFTX' }
     | { code: 'POW2' }
     | { code: 'AND' }
     | { code: 'OR' }

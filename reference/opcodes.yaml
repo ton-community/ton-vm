@@ -114,6 +114,8 @@ opcodes:
   # A.5.3. Shifts, logical operations.
   LSHIFT: ["int"]
   RSHIFT: ["int"]
+  LSHIFTX: []
+  RSHIFTX: []
   POW2:
   AND:
   OR:

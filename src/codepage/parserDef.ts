@@ -349,8 +349,8 @@ CP0Auto.insertHex('ab', 8, (slice) => {
     let cc = slice.readUintNumber(8);
     return { code: 'RSHIFT', args: [cc + 1] }
 });
-CP0Auto.insertHex('ac', 8, { code: 'LSHIFT', args: [1] });
-CP0Auto.insertHex('ad', 8, { code: 'RSHIFT', args: [1] });
+CP0Auto.insertHex('ac', 8, { code: 'LSHIFTX' });
+CP0Auto.insertHex('ad', 8, { code: 'RSHIFTX' });
 CP0Auto.insertHex('ae', 8, { code: 'POW2' });
 // 11468800 (DUMMY)
 CP0Auto.insertHex('b0', 8, { code: 'AND' });
