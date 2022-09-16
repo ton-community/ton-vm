@@ -1,6 +1,6 @@
 import fs from 'fs';
 import yaml from 'js-yaml';
-let defs = yaml.load(fs.readFileSync(__dirname + '/../../opcodes.yaml', 'utf-8')) as { opcodes: { [key: string]: ('int' | 'bigint' | 'bool' | 'cell' | 'string')[] | undefined } };
+let defs = yaml.load(fs.readFileSync(__dirname + '/../../reference/opcodes.yaml', 'utf-8')) as { opcodes: { [key: string]: ('int' | 'bigint' | 'bool' | 'cell' | 'string')[] | undefined } };
 
 // Generate Defs
 let opcodesDefs: string = 'import { Cell } from \'ton\';';
